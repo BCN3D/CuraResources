@@ -1,0 +1,23 @@
+project(CuraResources NONE)
+
+cmake_minimum_required(VERSION 2.8.12)
+
+
+if(CMAKE_BUILD_TYPE MATCHES Release)
+	set(INSTALL_PATH share/cura/resources)
+else()
+	set(INSTALL_PATH "")
+endif()
+
+if(IS_ABSOLUTE ${INSTALL_PATH})
+	set(INSTALL_PATH ${INSTALL_PATH})
+else()
+    set(INSTALL_PATH ${CMAKE_INSTALL_PREFIX}/${INSTALL_PATH})
+endif()
+
+install(DIRECTORY definitions DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(DIRECTORY extruders DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(DIRECTORY materials DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(DIRECTORY meshes DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(DIRECTORY quality DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(DIRECTORY variants DESTINATION ${CMAKE_INSTALL_PREFIX})
