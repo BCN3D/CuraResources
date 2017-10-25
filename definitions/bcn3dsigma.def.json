@@ -53,11 +53,6 @@
         "machine_max_feedrate_x": { "default_value": 200 },
         "machine_max_feedrate_y": { "default_value": 200 },
         "machine_max_feedrate_z": { "default_value": 15 },
-        "material_flow_dependent_temperature":
-        {
-            "enabled": true,
-            "value": true
-        },
         "print_sequence": { "enabled": true },
         "layer_height": { "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))" },
         "layer_height_0":
@@ -65,7 +60,7 @@
             "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))",
             "value": "min(extruderValues('machine_nozzle_size')) / 2"
         },
-        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.1.0 (Build 25KH1411)\n\nG21          ;metric values\nG90          ;absolute positioning\nM82          ;set extruder to absolute mode\nM108 P1      ;enable layer fan for idle extruder\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\n" },
+        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.1.0 (Build 25KH1549)\n\nG21          ;metric values\nG90          ;absolute positioning\nM82          ;set extruder to absolute mode\nM108 P1      ;enable layer fan for idle extruder\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\n" },
         "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
         "machine_nozzle_temp_enabled": { "value": true },
         "material_bed_temp_wait": { "value": true },
@@ -85,9 +80,12 @@
         "skin_overlap": { "value": "10 if top_bottom_pattern != 'concentric' else 0" },
         "infill_sparse_thickness": { "value": "layer_height" },
         "infill_before_walls": { "value": false },
-        "default_material_print_temperature": { "enabled": "machine_nozzle_temp_enabled and not (material_flow_dependent_temperature)" },
-        "material_initial_print_temperature": { "enabled": "machine_nozzle_temp_enabled and not (material_flow_dependent_temperature)" },
-        "material_final_print_temperature": { "enabled": "machine_nozzle_temp_enabled and not (material_flow_dependent_temperature)" },
+        "material_flow_dependent_temperature":
+        {
+            "enabled": true,
+            "value": false
+        },
+        "material_standby_temperature": { "value": "150  if material_flow_dependent_temperature else material_print_temperature" },
         "retraction_min_travel": { "value": 1.5 },
         "switch_extruder_retraction_speeds": { "value": "retraction_speed" },
         "speed_wall_x": { "value": "speed_wall" },
@@ -155,7 +153,7 @@
         "raft_base_thickness": { "value": "extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * 0.75" },
         "raft_base_line_width": { "value": "extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * 2.5" },
         "raft_base_line_spacing": { "value": "extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * 7.5" },
-        "prime_tower_enable": { "value": false },
+        "prime_tower_enable": { "value": true },
         "prime_tower_size": { "value": "max(15, round(math.sqrt(prime_tower_min_volume/layer_height), 2))" },
         "prime_tower_wipe_enabled": { "value": false },
         "dual_pre_wipe": { "value": false },
