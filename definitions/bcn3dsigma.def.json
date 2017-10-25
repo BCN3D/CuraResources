@@ -164,7 +164,7 @@
         "coasting_enable": { "value": false },
         "coasting_min_volume": { "value": "coasting_volume * 2" },
         "support_conical_min_width": { "value": 10 },
-        "smart_purge": { "enabled": "print_mode == 'regular'" "},
+        "smart_purge": { "enabled": "print_mode == 'regular'" },
         "minimum_extrusion": { "value": 2 },
         "retract_reduction": { "enabled": true },
         "avoid_grinding_filament":
