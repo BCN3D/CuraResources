@@ -60,7 +60,7 @@
             "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))",
             "value": "min(extruderValues('machine_nozzle_size')) / 2"
         },
-        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.1.0 (Build 26KH1023)\n\nG21          ;metric values\nG90          ;absolute positioning\nM82          ;set extruder to absolute mode\nM108 P1      ;enable layer fan for idle extruder\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\n" },
+        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.1.0 (Build 27KH1137)\n\nG21          ;metric values\nG90          ;absolute positioning\nM82          ;set extruder to absolute mode\nM108 P1      ;enable layer fan for idle extruder\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\n" },
         "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
         "machine_nozzle_temp_enabled": { "value": true },
         "material_bed_temp_wait": { "value": true },
@@ -162,7 +162,6 @@
         "coasting_min_volume": { "value": "coasting_volume * 2" },
         "support_conical_min_width": { "value": 10 },
         "smart_purge": { "enabled": "print_mode == 'regular'" },
-        "minimum_extrusion": { "value": 2 },
         "retract_reduction": { "enabled": true },
         "avoid_grinding_filament":
         {
