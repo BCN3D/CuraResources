@@ -36,6 +36,20 @@
         "machine_max_feedrate_e": { "default_value": 40 },
         "print_mode": { "enabled": true },
         "avoid_grinding_filament": { "value": false },
+        "retraction_speed": { "maximum_value_warning": "35"},
+        "retraction_retract_speed":
+        {
+            "value": "min(retraction_speed, 35)",
+            "maximum_value_warning": "35"
+        },
+        "retraction_prime_speed": { "maximum_value_warning": "35"},
+        "switch_extruder_retraction_speeds": { "maximum_value_warning": "35"},
+        "switch_extruder_retraction_speed":
+        {
+            "value": "min(switch_extruder_retraction_speeds, 35)",
+            "maximum_value_warning": "35"
+        },
+        "switch_extruder_prime_speed": { "maximum_value_warning": "35"},
         "retraction_hop_height_after_extruder_switch": { "value": 5 }
     }
 }
