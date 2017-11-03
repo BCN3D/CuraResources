@@ -33,6 +33,7 @@
         "machine_acceleration": { "default_value": 1750 },
         "machine_max_jerk_xy": { "value": 12.5 },
         "machine_width": { "default_value": 420 },
+        "machine_max_feedrate_e": { "default_value": 40 },
         "print_mode": { "enabled": true },
         "avoid_grinding_filament": { "value": false },
         "retraction_hop_height_after_extruder_switch": { "value": 5 }
