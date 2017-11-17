@@ -6,7 +6,7 @@
             <material>PET-G</material>
             <color>Generic</color>
         </name>
-        <GUID>2691e2b2-c3a3-11e7-9d0f-cafef9683624</GUID>
+        <GUID>2b0fe1c6-cb9b-11e7-b82c-e14ad28bc5cb</GUID>
         <version>1</version>
         <color_code>#B22744</color_code>
         <instructions>http://bcn3dtechnologies.com/en/3d-printer-filaments</instructions>
@@ -42,7 +42,7 @@
         <diameter>2.85</diameter>
     </properties>
     <settings>
-        <setting key="print temperature">235</setting>
+        <setting key="print temperature">215</setting>
         <setting key="heated bed temperature">80</setting>
 
         <machine>
