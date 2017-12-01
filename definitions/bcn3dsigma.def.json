@@ -48,8 +48,6 @@
             ]
         },
         "gantry_height": { "default_value": 210 },
-        "extruder_prime_pos_z": { "default_value": 2.0 },
-        "extruder_prime_pos_abs": { "default_value": false },
         "machine_max_feedrate_x": { "default_value": 200 },
         "machine_max_feedrate_y": { "default_value": 200 },
         "machine_max_feedrate_z": { "default_value": 12 },
@@ -61,8 +59,8 @@
             "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))",
             "value": "min(extruderValues('machine_nozzle_size')) / 2"
         },
-        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.1.0 (Build 21LH1138)\n\nG21          ;metric values\nG90          ;absolute positioning\nM82          ;set extruder to absolute mode\nM108 P1      ;enable layer fan for idle extruder\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\n" },
-        "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
+        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.1.0 (Build 01MH1215)\n\nG21          ;metric values\nG90          ;absolute positioning\nM82          ;set extruder to absolute mode\nM204 S2000   ;set default acceleration\nM205 X15 Y15 ;set defaul jerk\nM108 P1      ;enable layer fan for idle extruder\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\nG1 E20 F50   ;extrude 20mm of feed stock\nG92 E0       ;zero the extruded length\nG4 P2000     ;stabilize hotend's pressure\nG1 F2400 E-8 ;retract\n" },
+        "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nM204 S2000               ;set default acceleration\nM205 X15 Y15             ;set defaul jerk\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
         "machine_nozzle_temp_enabled": { "value": true },
         "material_bed_temp_wait": { "value": true },
         "material_print_temp_wait": { "value": true },
@@ -77,7 +75,7 @@
         "fill_perimeter_gaps": { "value": "'nowhere'" },
         "xy_offset_layer_0": { "value": -0.1 },
         "z_seam_type": { "value": "'back'" },
-        "z_seam_x": { "value": "int(machine_width/2.)" },
+        "z_seam_x": { "value": "int(machine_width/2.) if print_mode == 'regular' else int((machine_width/2.)/2.) if print_mode == 'duplication' else int((machine_width/2. - 54/2)/2.)" },
         "z_seam_y": { "value": "machine_depth" },
         "z_seam_relative": { "value": false },
         "skin_no_small_gaps_heuristic": { "value": false },
@@ -90,7 +88,7 @@
             "enabled": true,
             "value": false
         },
-        "retract_at_layer_change": { "value": true },
+        "retract_at_layer_change": { "value": false },
         "retraction_speed": { "maximum_value_warning": "machine_max_feedrate_e"},
         "retraction_retract_speed":
         {
@@ -121,7 +119,7 @@
         "speed_travel_layer_0": { "value": "round(speed_travel * speed_layer_0 / speed_print, 1)" },
         "speed_equalize_flow_enabled": { "value": true },
         "speed_equalize_flow_max": { "value": 100 },
-        "acceleration_enabled": { "value": true },
+        "acceleration_enabled": { "value": false },
         "acceleration_print": { "value": "machine_acceleration" },
         "acceleration_wall_x": { "value": "round(acceleration_print - (acceleration_print - acceleration_wall_0)/ 2.)" },
         "acceleration_topbottom": { "value": "acceleration_wall_0" },
@@ -129,7 +127,7 @@
         "acceleration_support_interface": { "value": "acceleration_topbottom" },
         "acceleration_travel": { "value": "acceleration_print if magic_spiralize else machine_acceleration" },
         "acceleration_layer_0": { "value": "acceleration_topbottom" },
-        "jerk_enabled": { "value": true },
+        "jerk_enabled": { "value": false },
         "jerk_print": { "value": "machine_max_jerk_xy" },
         "jerk_wall": { "value": "jerk_print * 0.75" },
         "jerk_wall_0": { "value": "jerk_wall * 0.5" },
@@ -137,7 +135,7 @@
         "jerk_support": { "value": "jerk_wall" },
         "jerk_support_interface": { "value": "jerk_topbottom" },
         "jerk_prime_tower": { "value": "jerk_wall" },
-        "jerk_travel": { "value": "jerk_print if magic_spiralize else 15" },
+        "jerk_travel": { "value": "jerk_print if magic_spiralize else machine_max_jerk_xy" },
         "jerk_layer_0": { "value": "jerk_topbottom" },
         "start_layers_at_same_position":
         {
@@ -164,6 +162,7 @@
         "retraction_hop": { "value": "layer_height" },
         "retraction_hop_height_after_extruder_switch": { "value": 2 },
         "cool_fan_full_at_height": { "value": "0 if adhesion_type == 'raft' else layer_height_0 + 4 * layer_height" },
+        "support_xy_overrides_z": { "value": "xy_overrides_z" },
         "support_join_distance": { "value": 10 },
         "support_offset": { "value": 1 },
         "support_interface_enable": { "value": true },
