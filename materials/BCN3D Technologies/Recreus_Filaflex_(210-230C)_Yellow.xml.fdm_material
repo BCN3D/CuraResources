@@ -6,7 +6,7 @@
             <material>Filaflex (210-230C)</material>
             <color>Yellow</color>
         </name>
-        <GUID>53776483-050c-11e8-8f7f-efc9d1bc38a9</GUID>
+        <GUID>ef4c4b85-0b3f-11e8-9add-efc9d1bc38a9</GUID>
         <version>1</version>
         <color_code>#F1E318</color_code>
     </metadata>
@@ -17,10 +17,11 @@
     <settings>
         <setting key="print temperature">220</setting>
         <setting key="heated bed temperature">0</setting>
+        <setting key="standby temperature">150</setting>
+        <setting key="print cooling">100</setting>
 
         <machine>
            <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigma" />
-           <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigmax" />
            <hotend id="0.3mm - Brass" />
            <hotend id="0.4mm - Brass" />
            <hotend id="0.5mm - Hardened Steel" />

@@ -6,7 +6,7 @@
             <material>TPU</material>
             <color>Generic</color>
         </name>
-        <GUID>537568b2-050c-11e8-a3c3-efc9d1bc38a9</GUID>
+        <GUID>ef4a4fb5-0b3f-11e8-b5f9-efc9d1bc38a9</GUID>
         <version>1</version>
         <color_code>#343537</color_code>
         <instructions>http://bcn3dtechnologies.com/en/3d-printer-filaments</instructions>
@@ -44,10 +44,11 @@
     <settings>
         <setting key="print temperature">240</setting>
         <setting key="heated bed temperature">65</setting>
+        <setting key="standby temperature">150</setting>
+        <setting key="print cooling">100</setting>
 
         <machine>
            <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigma" />
-           <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigmax" />
            <hotend id="0.3mm - Brass" />
            <hotend id="0.4mm - Brass" />
            <hotend id="0.5mm - Hardened Steel" />

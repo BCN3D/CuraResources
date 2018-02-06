@@ -5,7 +5,8 @@
     "inherits": "fdmextruder",
     "metadata": {
         "machine": "bcn3dsigma",
-        "position": "0"
+        "position": "0",
+        "quality_definition": "bcn3dsigma_extruder_left"
     },
 
     "overrides": {
@@ -15,7 +16,7 @@
         },
         "machine_nozzle_offset_x": { "default_value": 0.0 },
         "machine_nozzle_offset_y": { "default_value": 0.0 },
-        "machine_extruder_start_code": { "default_value": "G91\nG1 F12000 Z2\nG90\n" },
+        "machine_extruder_start_code": { "default_value": "G91\nG1 F12000 Z{retraction_hop_height_after_extruder_switch}\nG90\n\nG92 E0\nG1 F600 E{switch_extruder_retraction_amount}\nM800 F{purge_speed} S{smart_purge_slope} E{smart_purge_maximum_purge_distance} P{smart_purge_minimum_purge_distance} ;smartpurge\nG4 P2000\nG92 E0\nG1 F2400 E-{switch_extruder_retraction_amount}\nG92 E0\n" },
         "machine_extruder_start_pos_abs": { "default_value": false },
         "machine_extruder_start_pos_x": { "default_value": 0.0 },
         "machine_extruder_start_pos_y": { "default_value": 0.0 },
@@ -23,7 +24,6 @@
         "machine_extruder_end_pos_abs": { "default_value": false },
         "machine_extruder_end_pos_x": { "default_value": 0.0 },
         "machine_extruder_end_pos_y": { "default_value": 0.0 },
-        "extruder_prime_pos_x": { "default_value": 0.0 },
-        "extruder_prime_pos_y": { "default_value": 0.0 }
+        "extruder_prime_pos_x": { "default_value": 0.0 }
     }
 }

@@ -6,7 +6,7 @@
             <material>Composites</material>
             <color>XT-CF20</color>
         </name>
-        <GUID>5376a130-050c-11e8-a11f-efc9d1bc38a9</GUID>
+        <GUID>ef4b8833-0b3f-11e8-8b26-efc9d1bc38a9</GUID>
         <version>1</version>
         <color_code>#343537</color_code>
     </metadata>
@@ -17,10 +17,11 @@
     <settings>
         <setting key="print temperature">260</setting>
         <setting key="heated bed temperature">80</setting>
+        <setting key="standby temperature">150</setting>
+        <setting key="print cooling">100</setting>
 
         <machine>
            <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigma" />
-           <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigmax" />
            <hotend id="0.3mm - Brass">
                 <setting key="hardware compatible">no</setting>
            </hotend>

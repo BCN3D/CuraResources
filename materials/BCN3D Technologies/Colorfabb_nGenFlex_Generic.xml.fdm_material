@@ -6,7 +6,7 @@
             <material>nGenFlex</material>
             <color>Generic</color>
         </name>
-        <GUID>5376ef55-050c-11e8-b375-efc9d1bc38a9</GUID>
+        <GUID>ef4bfd61-0b3f-11e8-986b-efc9d1bc38a9</GUID>
         <version>1</version>
         <color_code>#343537</color_code>
     </metadata>
@@ -17,10 +17,11 @@
     <settings>
         <setting key="print temperature">255</setting>
         <setting key="heated bed temperature">100</setting>
+        <setting key="standby temperature">150</setting>
+        <setting key="print cooling">0</setting>
 
         <machine>
            <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigma" />
-           <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigmax" />
            <hotend id="0.3mm - Brass" />
            <hotend id="0.4mm - Brass" />
            <hotend id="0.5mm - Hardened Steel" />
