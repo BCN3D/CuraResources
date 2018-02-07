@@ -33,6 +33,7 @@
         "machine_width": { "default_value": 210 },
         "machine_depth": { "default_value": 297 },
         "machine_height": { "default_value": 210 },
+        "machine_disallowed_areas": { "value": "[[]] if print_mode == 'regular' else [[[-(abs(machine_head_with_fans_polygon[0][0]) + abs(machine_head_with_fans_polygon[2][0])) / 2, machine_depth / 2], [-(abs(machine_head_with_fans_polygon[0][0]) + abs(machine_head_with_fans_polygon[2][0])) / 2, -machine_depth / 2], [machine_width / 2, -machine_depth / 2], [machine_width / 2, machine_depth / 2]]] if print_mode == 'mirror' else [[[0, machine_depth / 2], [0, -machine_depth / 2], [machine_width / 2, -machine_depth / 2], [machine_width / 2, machine_depth / 2]]]" },
         "machine_heated_bed": { "default_value": true },
         "machine_extruder_count": { "default_value": 2 },
         "machine_center_is_zero": { "default_value": false },
@@ -59,13 +60,11 @@
             "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))",
             "value": "min(extruderValues('machine_nozzle_size')) / 2"
         },
-        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 06CI1415)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S2000   ;set default acceleration\nM205 X15 Y15 ;set default jerk\nM108 P1      ;enable layer fan for idle extruder\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n" },
+        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 07CI1458)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S2000   ;set default acceleration\nM205 X15 Y15 ;set default jerk\nM108 P1      ;enable layer fan for idle extruder\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
         "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nM204 S2000               ;set default acceleration\nM205 X15 Y15             ;set default jerk\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
         "machine_nozzle_temp_enabled": { "value": true },
         "material_bed_temp_wait": { "value": true },
         "material_print_temp_wait": { "value": true },
-        "material_bed_temp_prepend": { "value": false },
-        "material_print_temp_prepend": { "value": false },
         "line_width": { "value": "machine_nozzle_size" },
         "wall_line_width_x": { "value": "machine_nozzle_size" },
         "infill_line_width": { "value": "machine_nozzle_size" },
@@ -209,7 +208,6 @@
             "enabled": true,
             "value": true
         },
-        "retract_reduction": { "enabled": true },
         "avoid_grinding_filament":
         {
             "enabled": true,
