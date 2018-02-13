@@ -6,7 +6,7 @@
             <material>PLA</material>
             <color>Red</color>
         </name>
-        <GUID>01d51e56-0cdd-11e8-a917-64510659b3ae</GUID>
+        <GUID>bc66d6f2-10ed-11e8-9e82-a6194706213a</GUID>
         <version>1</version>
         <color_code>#FE2600</color_code>
         <instructions>http://bcn3dtechnologies.com/en/3d-printer-filaments</instructions>
@@ -42,7 +42,7 @@
         <diameter>2.85</diameter>
     </properties>
     <settings>
-        <setting key="print temperature">210</setting>
+        <setting key="print temperature">205</setting>
         <setting key="heated bed temperature">65</setting>
         <setting key="standby temperature">150</setting>
         <setting key="print cooling">100</setting>
