@@ -959,7 +959,7 @@
                     "settable_per_meshgroup": true,
                     "settable_globally": true,
                     "reset_on_print_mode_change": true,
-                    "enabled": "machine_extruder_count > 1 and max(extruderValues('roofing_layer_count')) > 0 and max(extruderValues('top_layers')) > 0 and print_mode == 'regular"
+                    "enabled": "machine_extruder_count > 1 and max(extruderValues('roofing_layer_count')) > 0 and max(extruderValues('top_layers')) > 0 and print_mode == 'regular'"
                 },
                 "roofing_layer_count":
                 {
@@ -2141,11 +2141,12 @@
                     "label": "Maximum Retraction Count",
                     "description": "Number of retractions occurring within the retraction distance. When the number of retractions is reached, active extruder will park, prime and come back.",
                     "type": "int",
-                    "default_value": 50,
+                    "default_value": 90,
                     "minimum_value": "0",
                     "minimum_value_warning": "0",
                     "maximum_value_warning": "90",
                     "enabled": "avoid_grinding_filament",
+                    "value": "retraction_count_max",
                     "settable_per_extruder": true,
                     "comments": "BCN3D setting"
                 },
@@ -2173,7 +2174,7 @@
                     "minimum_value": "-273.15",
                     "minimum_value_warning": "0",
                     "maximum_value_warning": "260",
-                    "enabled": "machine_extruder_count > 1 and machine_nozzle_temp_enabled and print_mode == 'regular",
+                    "enabled": "machine_extruder_count > 1 and machine_nozzle_temp_enabled and print_mode == 'regular'",
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
                 },
@@ -3258,15 +3259,6 @@
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
                 },
-                "hop_at_layer_change":
-                {
-                    "label": "Z hop at Layer Change",
-                    "description": "Perform a Z Hop when the nozzle is moving to the next layer.",
-                    "type": "bool",
-                    "default_value": false,
-                    "settable_per_mesh": false,
-                    "settable_per_extruder": true
-                },
                 "retraction_hop": {
                     "label": "Z Hop Height",
                     "description": "The height difference when performing a Z Hop.",
@@ -3279,12 +3271,36 @@
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
                 },
+                "hop_at_layer_change":
+                {
+                    "label": "Z Hop At Layer Change",
+                    "description": "Perform a Z Hop when the nozzle is moving to the next layer.",
+                    "type": "bool",
+                    "default_value": false,
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true,
+                    "comments": "BCN3D setting"
+                },
+                "retraction_hop_height_at_layer_change": {
+                    "label": "Z Hop Height At Layer Change",
+                    "description": "Distance to lift Z when the nozzle is moving to the next layer.",
+                    "unit": "mm",
+                    "type": "float",
+                    "default_value": 2,
+                    "minimum_value": "0",
+                    "minimum_value_warning": "0",
+                    "maximum_value_warning": "5",
+                    "enabled": "hop_at_layer_change",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true,
+                    "comments": "BCN3D setting"
+                },
                 "retraction_hop_after_extruder_switch": {
                     "label": "Z Hop After Extruder Switch",
                     "description": "After the machine switched from one extruder to the other, the build plate is lowered to create clearance between the nozzle and the print. This prevents the nozzle from leaving oozed material on the outside of a print.",
                     "type": "bool",
                     "default_value": true,
-                    "enabled": "retraction_hop_enabled and machine_extruder_count > 1 and print_mode == 'regular",
+                    "enabled": "retraction_hop_enabled and machine_extruder_count > 1 and print_mode == 'regular'",
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
                 },
@@ -4222,7 +4238,7 @@
                     "type": "extruder",
                     "default_value": "0",
                     "reset_on_print_mode_change": true,
-                    "enabled": "machine_extruder_count > 1 and resolveOrValue('adhesion_type') != 'none' and print_mode == 'regular",
+                    "enabled": "machine_extruder_count > 1 and resolveOrValue('adhesion_type') != 'none' and print_mode == 'regular'",
                     "settable_per_mesh": false,
                     "settable_per_extruder": false
                 },

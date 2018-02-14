@@ -60,7 +60,7 @@
             "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))",
             "value": "min(extruderValues('machine_nozzle_size')) / 2"
         },
-        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 13CI1942)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S2000   ;set default acceleration\nM205 X15 Y15 ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
+        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 14CI1620)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S2000   ;set default acceleration\nM205 X15 Y15 ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
         "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nM204 S2000               ;set default acceleration\nM205 X15 Y15             ;set default jerk\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
         "machine_nozzle_temp_enabled": { "value": true },
         "material_bed_temp_wait": { "value": true },
@@ -110,6 +110,7 @@
         },
         "retraction_extra_prime_amount": { "value": "coasting_volume if coasting_enable else 0" },
         "retraction_min_travel": { "value": "3.75 * machine_nozzle_size" },
+        "retraction_count_max": { "value": "20 * retraction_extrusion_window" },
         "switch_extruder_retraction_amount":
         {
             "value": "machine_heat_zone_length",
@@ -162,6 +163,7 @@
         "retraction_combing": { "value": "'all'" },
         "retraction_hop": { "value": "2 * layer_height" },
         "hop_at_layer_change": { "value": "print_mode == 'regular'" },
+        "retraction_hop_height_at_layer_change": { "value": "retraction_hop_height_after_extruder_switch" },
         "retraction_hop_height_after_extruder_switch": { "value": 2 },
         "cool_fan_enabled": { "value": true },
         "clone_cool_fan":
@@ -220,9 +222,8 @@
         "avoid_grinding_filament":
         {
             "enabled": true,
-            "value": true
+            "value": false
         },
-        "fix_tool_change_travel": { "value": true },
-        "auto_apply_fixes": { "value": true }
+        "fix_tool_change_travel": { "value": true }
     }
 }
