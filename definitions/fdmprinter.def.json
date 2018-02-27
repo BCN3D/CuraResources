@@ -2202,7 +2202,7 @@
                     "default_value": 20,
                     "value": "machine_heat_zone_length",
                     "minimum_value_warning": "0",
-                    "maximum_value_warning": "100",
+                    "maximum_value_warning": "500",
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
                 },
@@ -2590,6 +2590,33 @@
                     "maximum_value_warning": "150",
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
+                },
+                "purge_speed":
+                {
+                    "label": "Purge Speed",
+                    "description": "The speed at which the filament is pushed by the extruder when purging in the purge tray.",
+                    "unit": "mm/s",
+                    "type": "float",
+                    "default_value": 0.8,
+                    "minimum_value": "1/60.0",
+                    "maximum_value": "machine_max_feedrate_e",
+                    "enabled": "(smart_purge and print_mode == 'regular') or avoid_grinding_filament",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true,
+                    "comments": "BCN3D setting"
+                },
+                "purge_speed_gcode":
+                {
+                    "label": "Purge Speed",
+                    "description": "The speed at which the filament is pushed by the extruder when purging in the purge tray.",
+                    "unit": "mm/min",
+                    "type": "float",
+                    "default_value": 0.8,
+                    "value": "purge_speed * 60",
+                    "enabled": false,
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true,
+                    "comments": "BCN3D setting"
                 },
                 "acceleration_enabled":
                 {
@@ -3362,7 +3389,7 @@
                 },
                 "clone_cool_fan_gcode":
                 {
-                    "label": "Clone Print  GCode",
+                    "label": "Clone Print GCode",
                     "description": "GCode to enable cooling fan for the idle extruder.",
                     "type": "enum",
                     "options":
@@ -4854,31 +4881,29 @@
                     "comments": "BCN3D setting",
                     "children":
                     {
-                        "purge_speed":
-                        {
-                            "label": "Purge Speed",
-                            "description": "The speed at which the filament is pushed by the extruder when purging in the purge tray.",
-                            "unit": "mm/s",
-                            "type": "float",
-                            "default_value": 0.8,
-                            "minimum_value": "1/60.0",
-                            "maximum_value": "machine_max_feedrate_e",
-                            "enabled": "smart_purge and print_mode == 'regular'",
-                            "settable_per_mesh": false,
-                            "settable_per_extruder": true,
-                            "comments": "BCN3D setting"
-                        },
                         "smart_purge_slope":
                         {
                             "label": "Distance Gradient",
-                            "description": "Distance to purge per second idle. Purged distance will increase this amount each second the toolhead remains idle. If the final distance is shorter than the Minimum Purge Distance it will be increased to this value the ensure the right Hotend's pressure. If the final distance is greater than the Maximum Purge Distance it will be decreased to this value to avoid purge tray filling.",
-                            "unit": "mm/s",
+                            "description": "Distance to purge per second idle. Purged distance will increase this amount each minute the toolhead remains idle. If the final distance is shorter than the Minimum Purge Distance it will be increased to this value the ensure the right Hotend's pressure. If the final distance is greater than the Maximum Purge Distance it will be decreased to this value to avoid purge tray filling.",
+                            "unit": "mm/min",
                             "type": "float",
                             "default_value": 0,
                             "minimum_value": "0",
                             "minimum_value_warning": "0",
                             "maximum_value_warning": "50",
                             "enabled": "smart_purge and print_mode == 'regular'",
+                            "settable_per_extruder": true,
+                            "comments": "BCN3D setting"
+                        },
+                        "smart_purge_slope_gcode":
+                        {
+                            "label": "Distance Gradient",
+                            "description": "GCode to send proper value to the machine.",
+                            "unit": "mm/s",
+                            "type": "float",
+                            "default_value": 0,
+                            "value": "smart_purge_slope / float(60)",
+                            "enabled": false,
                             "settable_per_extruder": true,
                             "comments": "BCN3D setting"
                         },
@@ -4890,6 +4915,7 @@
                             "type": "float",
                             "default_value": 0,
                             "minimum_value": "0",
+                            "maximum_value": "smart_purge_maximum_purge_distance",
                             "minimum_value_warning": "0",
                             "maximum_value_warning": "50",
                             "enabled": "smart_purge and print_mode == 'regular'",
@@ -4903,7 +4929,7 @@
                             "unit": "mm",
                             "type": "float",
                             "default_value": 0,
-                            "minimum_value": "0",
+                            "minimum_value": "smart_purge_minimum_purge_distance",
                             "minimum_value_warning": "0",
                             "maximum_value_warning": "50",
                             "enabled": "smart_purge and print_mode == 'regular'",
@@ -4911,6 +4937,64 @@
                             "comments": "BCN3D setting"
                         }
                     }
+                },
+                "smart_purge_enable_gcode":
+                {
+                    "label": "Smart Purge Enable GCode",
+                    "description": "GCode to enable smart purge commands.",
+                    "type": "enum",
+                    "options":
+                    {
+                        ";": "No",
+                        "": "Yes"
+                    },
+                    "default_value": "",
+                    "value": "'' if smart_purge else ';'",
+                    "enabled": false,
+                    "settable_per_extruder": true,
+                    "comments": "BCN3D setting"
+                },
+                "purge_in_bucket": {
+                    "label": "Purge in the bucket",
+                    "description": "At extruder change, add an extra prime amount in the bucket to compensate oozed material while the Extruder was idle. Disable Prime tower to save time and filament.",
+                    "type": "bool",
+                    "default_value": false,
+                    "enabled": false,
+                    "settable_per_extruder": true,
+                    "comments": "BCN3D setting"
+                },
+                "purge_volume":
+                {
+                    "label": "Purge Volume",
+                    "description": "Volume of material purged at extruder change.",
+                    "type": "float",
+                    "unit": "mm³",
+                    "enabled": "purge_in_bucket",
+                    "default_value": 76,
+                    "minimum_value": "0",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": false
+                },
+                "purge_only_in_small_areas": {
+                    "label": "Purge Only If Needed",
+                    "description": "Purge only if the volume extruder in the first area printed with the entering extruder is smaller than Minimum Extruded Volume.",
+                    "type": "bool",
+                    "default_value": false,
+                    "enabled": "purge_in_bucket",
+                    "settable_per_extruder": true,
+                    "comments": "BCN3D setting"
+                },
+                "minimum_extruded_volume":
+                {
+                    "label": "Minimum Extruded Volume",
+                    "description": "Minimum volume of material extruded in the first area printed with the entering extruder. If the extruded volume is bigger than this, the extruder won't purge in the bucket.",
+                    "type": "float",
+                    "unit": "mm³",
+                    "enabled": "purge_only_in_small_areas",
+                    "default_value": 76,
+                    "minimum_value": "0",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true
                 },
                 "prime_tower_enable":
                 {

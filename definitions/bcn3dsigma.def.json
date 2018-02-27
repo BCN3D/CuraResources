@@ -60,8 +60,8 @@
             "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))",
             "value": "min(extruderValues('machine_nozzle_size')) / 2"
         },
-        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 21CI1425)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S2000   ;set default acceleration\nM205 X15 Y15 ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
-        "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nM204 S2000               ;set default acceleration\nM205 X15 Y15             ;set default jerk\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
+        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 27CI1404)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
+        "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
         "machine_nozzle_temp_enabled": { "value": true },
         "material_bed_temp_wait": { "value": true },
         "material_print_temp_wait": { "value": true },
@@ -74,17 +74,15 @@
         "skin_angles": { "value": "[0, 90]" },
         "wall_0_inset": { "value": "wall_line_width_x - wall_line_width_0" },
         "optimize_wall_printing_order": { "value": true },
-        "xy_offset_layer_0": { "value": -0.1 },
         "z_seam_x": { "value": "int(machine_width/2.) if print_mode == 'regular' else int((machine_width/2.)/2.) if print_mode == 'duplication' else int((machine_width/2. - 54/2)/2.)" },
         "z_seam_y": { "value": "machine_depth" },
         "skin_overlap": { "value": "0" },
         "infill_before_walls": { "value": "infill_sparse_layer == 1" },
         "material_initial_print_temperature": { "value": "material_print_temperature + 0 if material_flow_dependent_temperature else material_print_temperature" },
         "material_final_print_temperature": { "value": "material_print_temperature + -2.5 if material_flow_dependent_temperature else material_print_temperature" },
-        "material_extrusion_cool_down_speed": { "value": 1 },
         "retract_at_layer_change": { "value": false },
         "retraction_amount": { "maximum_value_warning": "machine_heat_zone_length" },
-        "retraction_amount_multiplier": { "value": 1.5 },
+        "retraction_amount_multiplier": { "value": 1 },
         "retraction_speed": { "maximum_value_warning": "machine_max_feedrate_e" },
         "retraction_retract_speed":
         {
@@ -110,13 +108,8 @@
         "retraction_extra_prime_amount": { "value": "coasting_volume if coasting_enable else 0" },
         "retraction_min_travel": { "value": "3.75 * machine_nozzle_size" },
         "retraction_count_max": { "value": "20 * retraction_extrusion_window" },
-        "switch_extruder_retraction_amount":
-        {
-            "value": "machine_heat_zone_length",
-            "maximum_value_warning": "machine_heat_zone_length"
-        },
         "speed_wall": { "value": "speed_print" },
-        "speed_topbottom": { "value": "speed_wall_0" },
+        "speed_topbottom": { "value": "speed_wall_x" },
         "speed_support_interface": { "value": "speed_wall" },
         "speed_travel": { "value": "round(speed_print if magic_spiralize else 200)" },
         "speed_travel_layer_0": { "value": "round(speed_travel * speed_layer_0 / speed_print, 1)" },
@@ -126,7 +119,7 @@
         "acceleration_enabled": { "value": true },
         "acceleration_print": { "value": "machine_acceleration" },
         "acceleration_wall_x": { "value": "round(acceleration_print - (acceleration_print - acceleration_wall_0)/ 2.)" },
-        "acceleration_topbottom": { "value": "acceleration_wall_0" },
+        "acceleration_topbottom": { "value": "acceleration_wall_x" },
         "acceleration_support": { "value": "acceleration_wall_x" },
         "acceleration_support_interface": { "value": "acceleration_topbottom" },
         "acceleration_travel": { "value": "acceleration_print if magic_spiralize else machine_acceleration" },
@@ -135,7 +128,7 @@
         "jerk_print": { "value": "machine_max_jerk_xy" },
         "jerk_wall": { "value": "jerk_print * 0.75" },
         "jerk_wall_0": { "value": "jerk_wall * 0.5" },
-        "jerk_topbottom": { "value": "jerk_wall_0" },
+        "jerk_topbottom": { "value": "jerk_wall_x" },
         "jerk_support": { "value": "jerk_wall" },
         "jerk_support_interface": { "value": "jerk_topbottom" },
         "jerk_prime_tower": { "value": "jerk_wall" },
@@ -161,7 +154,8 @@
         "retraction_hop_only_when_collides": { "value": true },
         "retraction_combing": { "value": "'all'" },
         "retraction_hop": { "value": "2 * layer_height" },
-        "retraction_hop_height_at_layer_change": { "value": "retraction_hop_height_after_extruder_switch" },
+        "hop_at_layer_change": { "value": "print_mode == 'regular'" },
+        "retraction_hop_height_at_layer_change": { "value": 2 },
         "retraction_hop_height_after_extruder_switch": { "value": 2 },
         "cool_fan_enabled": { "value": true },
         "clone_cool_fan":
@@ -187,8 +181,8 @@
         "support_conical_enabled": { "value": true },
         "extruder_prime_pos_y": { "value": "machine_depth" },
         "adhesion_type": { "value": "'skirt'" },
-        "skirt_line_count": { "value": 2 },
-        "skirt_brim_minimal_length": { "value": "round((20 * math.pi * (extruderValue(adhesion_extruder_nr, 'material_diameter') / 2) ** 2) / (extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * layer_height_0), 2)" },
+        "skirt_line_count": { "value": 3 },
+        "skirt_brim_minimal_length": { "value": "round((max(10, switch_extruder_retraction_amount) * math.pi * (extruderValue(adhesion_extruder_nr, 'material_diameter') / 2) ** 2) / (extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * layer_height_0), 2)" },
         "raft_margin": { "value": 3 },
         "raft_airgap": { "value": "min(extruderValues('machine_nozzle_size')) * 0.55" },
         "raft_interface_thickness": { "value": "extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * 0.7" },
@@ -196,8 +190,9 @@
         "raft_base_thickness": { "value": "extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * 0.75" },
         "raft_base_line_width": { "value": "extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * 2.5" },
         "raft_base_line_spacing": { "value": "extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * 7.5" },
-        "prime_tower_enable": { "value": false },
+        "prime_tower_enable": { "value": true },
         "prime_tower_size": { "value": "max(25, round(math.sqrt(prime_tower_min_volume/layer_height), 2))" },
+        "prime_tower_wall_thickness": { "value": "max(extruderValues('machine_nozzle_size')) * 2" },
         "prime_tower_wipe_enabled": { "value": false },
         "dual_pre_wipe": { "value": false },
         "ooze_shield_enabled": { "value": false },
@@ -210,12 +205,11 @@
         "coasting_enable": { "value": true },
         "coasting_min_volume": { "value": "coasting_volume * 4" },
         "support_conical_min_width": { "value": 10 },
-        "skirt_brim_minimal_length": { "value": "round((20 * math.pi * (extruderValue(adhesion_extruder_nr, 'material_diameter') / 2) ** 2) / (extruderValue(adhesion_extruder_nr, 'machine_nozzle_size') * layer_height_0), 2)" },
         "purge_speed": { "value": "round(max(40 * (machine_nozzle_size / material_diameter) ** 2, machine_nozzle_size * layer_height * speed_infill / (math.pi * ((material_diameter / 2) ** 2))), 2)" },
         "smart_purge":
         {
             "enabled": "print_mode == 'regular'",
-            "value": true
+            "value": false
         },
         "avoid_grinding_filament":
         {

@@ -6,7 +6,7 @@
             <material>PET-G</material>
             <color>White</color>
         </name>
-        <GUID>05282671-11aa-11e8-86a8-a6194706213a</GUID>
+        <GUID>dc979d24-1bbe-11e8-83a0-a6194706213a</GUID>
         <version>1</version>
         <color_code>#FFFFFF</color_code>
         <instructions>http://bcn3dtechnologies.com/en/3d-printer-filaments</instructions>
@@ -43,9 +43,9 @@
     </properties>
     <settings>
         <setting key="print temperature">215</setting>
-        <setting key="heated bed temperature">80</setting>
+        <setting key="heated bed temperature">85</setting>
         <setting key="standby temperature">150</setting>
-        <setting key="print cooling">0</setting>
+        <setting key="print cooling">90</setting>
 
         <machine>
            <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigma" />
