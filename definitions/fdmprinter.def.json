@@ -2025,6 +2025,7 @@
                     "type": "bool",
                     "default_value": false,
                     "settable_per_mesh": false,
+                    "enabled": "not hop_at_layer_change",
                     "settable_per_extruder": true
                 },
                 "retraction_amount":
@@ -4999,7 +5000,7 @@
                 "prime_tower_enable":
                 {
                     "label": "Enable Prime Tower",
-                    "description": "Print a tower next to the print which serves to prime the material after each nozzle switch.",
+                    "description": "Print a tower next to the print which serves to prime the material after each nozzle switch. Disable Smart Purge to save time and filament.",
                     "type": "bool",
                     "reset_on_print_mode_change": true,
                     "enabled": "machine_extruder_count > 1 and print_mode == 'regular'",
@@ -5020,7 +5021,7 @@
                     "minimum_value": "0",
                     "maximum_value": "min(0.5 * machine_width, 0.5 * machine_depth)",
                     "minimum_value_warning": "max(extruderValues('prime_tower_line_width')) * 2",
-                    "maximum_value_warning": "20",
+                    "maximum_value_warning": "25",
                     "settable_per_mesh": false,
                     "settable_per_extruder": false
                 },
