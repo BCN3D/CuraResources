@@ -2613,7 +2613,7 @@
                     "unit": "mm/min",
                     "type": "float",
                     "default_value": 0.8,
-                    "value": "purge_speed * 60",
+                    "value": "round(purge_speed * 60, 1)",
                     "enabled": false,
                     "settable_per_mesh": false,
                     "settable_per_extruder": true,
