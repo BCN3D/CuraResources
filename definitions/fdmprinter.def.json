@@ -3313,6 +3313,17 @@
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
                 },
+                "retraction_hop_after_prime_tower": {
+                    "label": "Z Hop After Prime Tower",
+                    "description": "After priming in the tower, the build plate is lowered to create clearance between the nozzle and the print. This prevents the nozzle from leaving oozed material on the outside of a print.",
+                    "type": "bool",
+                    "default_value": true,
+                    "value": "retraction_hop_enabled",
+                    "enabled": "retraction_hop_enabled and machine_extruder_count > 1 and print_mode == 'regular' and prime_tower_enable",
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true,
+                    "comments": "BCN3D Setting"
+                },
                 "hop_at_layer_change":
                 {
                     "label": "Z Hop At Layer Change",
@@ -3533,7 +3544,7 @@
                     "default_value": false,
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
-                }
+                }               
             }
         },
         "support":
