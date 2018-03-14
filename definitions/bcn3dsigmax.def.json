@@ -18,7 +18,7 @@
         "has_machine_materials": true,
         "has_variant_materials": true,
         "has_variants": true,
-        "preferred_material": "*BCN3D_Filaments_PLA_Orange*",
+        "preferred_material": "*BCN3D_Filaments_PLA_Light_Blue*",
         "preferred_variant": "*0.6mm_-_Brass*",
         "preferred_quality": "*Standard*",
         "variants_name": "Hotend",
