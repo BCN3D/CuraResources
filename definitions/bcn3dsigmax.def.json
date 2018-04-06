@@ -30,6 +30,7 @@
     },
     "overrides": {
         "machine_name": { "default_value": "Sigmax" },
+        "machine_prefix": { "default_value": "Sx" },
         "machine_acceleration": { "default_value": 1750 },
         "machine_max_jerk_xy": { "value": 12.5 },
         "machine_width": { "default_value": 420 },
