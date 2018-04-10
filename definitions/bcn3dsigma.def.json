@@ -1,5 +1,4 @@
 {
-    "id": "bcn3dsigma",
     "version": 2,
     "name": "Sigma",
     "inherits": "fdmprinter",
@@ -61,7 +60,7 @@
             "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))",
             "value": "min(extruderValues('machine_nozzle_size')) / 2"
         },
-        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 06EI1343)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
+        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 10EI1319)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
         "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
         "machine_nozzle_temp_enabled": { "value": true },
         "material_bed_temp_wait": { "value": true },
@@ -73,7 +72,7 @@
         "infill_line_width": { "value": "machine_nozzle_size" },
         "wall_line_width_0": { "value": "machine_nozzle_size * 0.875" },
         "support_line_width": { "value": "infill_line_width" },
-        "prime_tower_line_width": { "value": "prime_tower_wall_thickness / 2" },
+        "prime_tower_line_width": { "value": "prime_tower_wall_thickness / 2 if prime_tower_wall_thickness <= round(2 * (min(extruderValues('machine_nozzle_size')) + (max(extruderValues('machine_nozzle_size')) - min(extruderValues('machine_nozzle_size'))) / 2), 2) else machine_nozzle_size" },
         "top_bottom_pattern": { "value": "'zigzag'" },
         "skin_angles": { "value": "[0, 90]" },
         "wall_0_inset": { "value": "wall_line_width_x - wall_line_width_0" },
@@ -171,9 +170,8 @@
             "value": "print_mode == 'regular' and extruderValue(0, 'cool_fan_enabled') and extruderValue(1, 'cool_fan_enabled')"
         },
         "cool_fan_full_at_height": { "value": "0 if adhesion_type == 'raft' else layer_height_0 + 4 * layer_height" },
-        "cool_min_layer_time": { "value": 10 },
+        "cool_min_layer_time": { "value": 0 },
         "cool_min_speed": { "value": "speed_wall_0" },
-        "cool_lift_head": { "value": true },
         "support_z_distance": { "value": "max(layer_height, 0.15)" },
         "support_xy_overrides_z": { "value": "'xy_overrides_z'" },
         "support_xy_distance": { "value": "machine_nozzle_size * 2" },
@@ -209,7 +207,7 @@
             "enabled": true,
             "value": false
         },
-        "meshfix_maximum_resolution": { "value": 0.0125  },
+        "meshfix_maximum_resolution": { "value": 0.0125 },
         "coasting_enable": { "value": true },
         "coasting_min_volume": { "value": "coasting_volume * 4" },
         "support_conical_min_width": { "value": 10 },

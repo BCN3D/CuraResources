@@ -1,5 +1,4 @@
 {
-    "id": "bcn3dsigmax",
     "version": 2,
     "name": "Sigmax",
     "inherits": "bcn3dsigma",
@@ -12,7 +11,6 @@
         "platform_offset": [0, 0, 0],
         "has_machine_quality": true,
         "visible": true,
-        "variant_definition": "bcn3dsigma",
         "quality_definition": "bcn3dsigma",
         "has_materials": true,
         "has_machine_materials": true,
