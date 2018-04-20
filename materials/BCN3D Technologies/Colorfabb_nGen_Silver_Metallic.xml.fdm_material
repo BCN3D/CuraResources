@@ -6,12 +6,12 @@
             <material>nGen</material>
             <color>Silver Metallic</color>
         </name>
-        <GUID>e533c4b2-3e49-11e8-9f4f-826c1962a676</GUID>
+        <GUID>b7f57e03-447d-11e8-a69d-64510659b3ae</GUID>
         <version>1</version>
         <color_code>#BFC4C7</color_code>
     </metadata>
     <properties>
-        <density>0</density>
+        <density>1.2</density>
         <diameter>2.85</diameter>
     </properties>
     <settings>

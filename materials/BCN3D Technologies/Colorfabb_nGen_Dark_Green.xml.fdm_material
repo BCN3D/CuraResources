@@ -6,12 +6,12 @@
             <material>nGen</material>
             <color>Dark Green</color>
         </name>
-        <GUID>e53412d5-3e49-11e8-9f77-826c1962a676</GUID>
+        <GUID>b7f5cc20-447d-11e8-a7d1-64510659b3ae</GUID>
         <version>1</version>
         <color_code>#008B56</color_code>
     </metadata>
     <properties>
-        <density>0</density>
+        <density>1.2</density>
         <diameter>2.85</diameter>
     </properties>
     <settings>

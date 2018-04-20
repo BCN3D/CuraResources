@@ -6,12 +6,12 @@
             <material>nGen</material>
             <color>Yellow</color>
         </name>
-        <GUID>e533ebc2-3e49-11e8-8cf4-826c1962a676</GUID>
+        <GUID>b7f5a50f-447d-11e8-8e40-64510659b3ae</GUID>
         <version>1</version>
         <color_code>#FEE500</color_code>
     </metadata>
     <properties>
-        <density>0</density>
+        <density>1.2</density>
         <diameter>2.85</diameter>
     </properties>
     <settings>

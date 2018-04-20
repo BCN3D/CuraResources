@@ -6,12 +6,12 @@
             <material>nGen</material>
             <color>Gold Metallic</color>
         </name>
-        <GUID>e533ebc0-3e49-11e8-8016-826c1962a676</GUID>
+        <GUID>b7f57e05-447d-11e8-87f3-64510659b3ae</GUID>
         <version>1</version>
         <color_code>#DE9E19</color_code>
     </metadata>
     <properties>
-        <density>0</density>
+        <density>1.2</density>
         <diameter>2.85</diameter>
     </properties>
     <settings>
