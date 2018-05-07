@@ -60,7 +60,7 @@
             "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))",
             "value": "min(extruderValues('machine_nozzle_size')) / 2"
         },
-        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 04FI1244)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
+        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 07FI1409)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
         "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
         "machine_nozzle_temp_enabled": { "value": true },
         "material_bed_temp_wait": { "value": true },
@@ -76,6 +76,7 @@
         "top_bottom_pattern": { "value": "'zigzag'" },
         "skin_angles": { "value": "[0, 90]" },
         "wall_0_inset": { "value": "wall_line_width_x - wall_line_width_0" },
+        "wall_0_wipe_dist": { "value": 0 },
         "optimize_wall_printing_order": { "value": true },
         "z_seam_x": { "value": "int(machine_width/2.) if print_mode == 'regular' else int((machine_width/2.)/2.) if print_mode == 'duplication' else int((machine_width/2. - 54/2)/2.)" },
         "z_seam_y": { "value": "machine_depth" },
@@ -218,7 +219,6 @@
             "value": false
         },
         "meshfix_maximum_resolution": { "value": 0.0125 },
-        "coasting_enable": { "value": true },
         "coasting_min_volume": { "value": "coasting_volume * 4" },
         "support_conical_min_width": { "value": 10 },
         "purge_speed": { "value": "round(max(40 * (machine_nozzle_size / material_diameter) ** 2, machine_nozzle_size * layer_height * speed_infill / (math.pi * ((material_diameter / 2) ** 2))), 2)" },
