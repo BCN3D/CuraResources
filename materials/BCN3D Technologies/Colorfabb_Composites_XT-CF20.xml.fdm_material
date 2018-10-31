@@ -22,6 +22,7 @@
 
         <machine>
            <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigma" />
+           <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigmar19" />
            <hotend id="0.3mm - Brass">
                 <setting key="hardware compatible">no</setting>
            </hotend>
