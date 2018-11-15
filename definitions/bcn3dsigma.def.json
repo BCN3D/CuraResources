@@ -18,7 +18,7 @@
         "has_variant_materials": true,
         "has_variants": true,
         "preferred_material": "*BCN3D_Filaments_PLA_Light_Blue*",
-        "preferred_variant": "0.4mm_-_Brass*",
+        "preferred_variant": "bcn3dsigma_0.4mm_-_Brass*",
         "preferred_quality": "*Standard*",
         "variants_name": "Hotend",
         "machine_extruder_trains":
