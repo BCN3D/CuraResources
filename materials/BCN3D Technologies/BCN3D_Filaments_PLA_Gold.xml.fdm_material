@@ -71,9 +71,5 @@
            <hotend id="e3D - 0.8mm - Brass" />
            <hotend id="e3D - 1.0mm - Brass" />
         </machine>
-        <machine>
-        </machine>
-        <machine>
-        </machine>
     </settings>
 </fdmmaterial>

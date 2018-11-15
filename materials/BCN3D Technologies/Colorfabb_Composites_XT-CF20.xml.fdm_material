@@ -74,9 +74,5 @@
                 <setting key="hardware compatible">no</setting>
            </hotend>
         </machine>
-        <machine>
-        </machine>
-        <machine>
-        </machine>
     </settings>
 </fdmmaterial>
