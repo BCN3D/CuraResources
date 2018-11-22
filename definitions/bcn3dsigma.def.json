@@ -69,7 +69,7 @@
             "maximum_value": "0.75 * min(extruderValues('machine_nozzle_size'))",
             "value": "min(extruderValues('machine_nozzle_size')) / 2"
         },
-        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 16LI0843)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\n{purge_in_bucket_before_start_r_enable_gcode}\nG92 E0       \nG4 P2000     ;stabilize hotend's pressure\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{purge_in_bucket_before_start_l_enable_gcode}\nG92 E0\nG4 P2000     ;stabilize hotend's pressure\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
+        "machine_start_gcode": { "default_value": ";Sigma ProGen 2.2.0 (Build 16LI0843)\n\nG21          ;metric values\nG90          ;absolute positioning\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nM107         ;start with the fan off\nG28 X0 Y0    ;move X/Y to min endstops\nG28 Z0       ;move Z to min endstops\nG1 Z5 F200   ;safety Z axis movement\nT1           ;switch to the right extruder\nG92 E0       ;zero the extruded length\n{purge_in_bucket_before_start_r_enable_gcode}\nG92 E0       \nG4 P2000     ;stabilize hotend's pressure\nT0           ;switch to the left extruder\nG92 E0       ;zero the extruded length\n{purge_in_bucket_before_start_l_enable_gcode}\nG92 E0\nG4 P2000     ;stabilize hotend's pressure\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
         "machine_end_gcode": { "default_value": "M104 S0 T0               ;left extruder heater off\nM104 S0 T1               ;right extruder heater off\nM140 S0                  ;heated bed heater off\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nG91                      ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0                ;move X/Y to min endstops so the head is out of the way\nM84                      ;steppers off\nG90                      ;absolute positioning\n" },
         "machine_nozzle_temp_enabled": { "value": true },
         "material_bed_temp_wait": { "value": true },
@@ -173,20 +173,8 @@
         "retraction_hop_only_when_collides": { "value": true },
         "retraction_combing": { "value": "'all'" },
         "retraction_hop": { "value": "2 * layer_height" },
-        "hop_at_layer_change":
-        {
-            "dual_value": "print_mode == 'regular' and not magic_spiralize",
-            "reset_on_used_extruders_change": true
-        },
-        "retraction_hop_height_at_layer_change": { "value": 2 },
         "retraction_hop_height_after_extruder_switch": { "value": 2 },
         "cool_fan_enabled": { "value": true },
-        "clone_cool_fan":
-        {
-            "dual_value": "print_mode == 'regular' and extruderValue(0, 'cool_fan_enabled') and extruderValue(1, 'cool_fan_enabled')",
-            "reset_on_used_extruders_change": true,
-            "dual_enabled": true
-        },
         "cool_fan_full_at_height": { "value": "0 if adhesion_type == 'raft' else layer_height_0 + 4 * layer_height" },
         "cool_min_layer_time": { "value": 0 },
         "cool_min_speed": { "value": "speed_wall_0" },
@@ -206,7 +194,6 @@
         "support_interface_skip_height": { "value": "layer_height" },
         "support_interface_pattern": { "value": "'lines'" },
         "support_minimal_diameter": { "value": 3.0 },
-        "start_purge_distance": { "value": 20 },
         "adhesion_type": { "value": "'skirt'" },
         "skirt_line_count":
         {
@@ -238,23 +225,9 @@
         "coasting_enable": { "value": true },
         "coasting_min_volume": { "value": "coasting_volume" },
         "support_conical_min_width": { "value": 10 },
-        "purge_speed": { "value": "round(max(40 * (machine_nozzle_size / material_diameter) ** 2, machine_nozzle_size * layer_height * speed_infill / (math.pi * ((material_diameter / 2) ** 2))), 2)" },
         "purge_in_bucket":
         {
-            "enabled": "print_mode == 'regular'",
             "value": false
-        },
-        "purge_distance": { "value": "smart_purge_minimum_purge_distance" },
-        "avoid_grinding_filament":
-        {
-            "enabled": true,
-            "value": true
-        },
-        "purge_in_bucket_before_start":
-        {
-            "value": true,
-            "enabled": true
-        },
-        "fix_tool_change_travel": { "value": true }
+        }
     }
 }

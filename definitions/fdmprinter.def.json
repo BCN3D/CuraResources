@@ -2047,7 +2047,6 @@
                     "type": "bool",
                     "default_value": false,
                     "settable_per_mesh": false,
-                    "enabled": "not hop_at_layer_change",
                     "settable_per_extruder": true
                 },
                 "retraction_amount":
@@ -2159,33 +2158,9 @@
                     "minimum_value": "0",
                     "maximum_value_warning": "500",
                     "type": "int",
-                    "value": "1000 if avoid_grinding_filament else 90",
-                    "enabled": "retraction_enable and not avoid_grinding_filament",
+                    "enabled": "retraction_enable",
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
-                },
-                "avoid_grinding_filament":
-                {
-                    "label": "Prevent Filament Grinding",
-                    "description": "When retracting repeatedly, this option moves the hotend to the purge tray and primes the needed amount of filament to allow working on a new piece of it. Disabling this feature can flatten the filament and cause grinding issues.",
-                    "type": "bool",
-                    "default_value": false,
-                    "enabled": false,
-                    "settable_per_extruder": true,
-                    "comments": "BCN3D setting"
-                },
-                "retraction_count_max_avoid_grinding_filament":
-                {
-                    "label": "Maximum Retraction Count",
-                    "description": "Number of retractions occurring within the retraction distance. When the number of retractions is reached, active extruder will park, prime and come back.",
-                    "type": "int",
-                    "default_value": 90,
-                    "minimum_value": "0",
-                    "maximum_value_warning": "500",
-                    "enabled": "avoid_grinding_filament",
-                    "value": "retraction_count_max",
-                    "settable_per_extruder": true,
-                    "comments": "BCN3D setting"
                 },
                 "retraction_extrusion_window":
                 {
@@ -2623,7 +2598,7 @@
                     "default_value": 0.8,
                     "minimum_value": "1/60.0",
                     "maximum_value": "machine_max_feedrate_e",
-                    "enabled": "(smart_purge and print_mode == 'regular') or avoid_grinding_filament",
+                    "enabled": "(smart_purge and print_mode == 'regular')",
                     "settable_per_mesh": false,
                     "settable_per_extruder": true,
                     "comments": "BCN3D setting"
@@ -3335,41 +3310,6 @@
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
                 },
-                "retraction_hop_after_prime_tower": {
-                    "label": "Z Hop After Prime Tower",
-                    "description": "After priming in the tower, the build plate is lowered to create clearance between the nozzle and the print. This prevents the nozzle from leaving oozed material on the outside of a print.",
-                    "type": "bool",
-                    "default_value": true,
-                    "value": "retraction_hop_enabled",
-                    "enabled": "retraction_hop_enabled and machine_extruder_count > 1 and print_mode == 'regular' and prime_tower_enable",
-                    "settable_per_mesh": false,
-                    "settable_per_extruder": true,
-                    "comments": "BCN3D Setting"
-                },
-                "hop_at_layer_change":
-                {
-                    "label": "Z Hop At Layer Change",
-                    "description": "Perform a Z Hop when the nozzle is moving to the next layer.",
-                    "type": "bool",
-                    "default_value": false,
-                    "settable_per_mesh": false,
-                    "settable_per_extruder": true,
-                    "comments": "BCN3D setting"
-                },
-                "retraction_hop_height_at_layer_change": {
-                    "label": "Z Hop Height At Layer Change",
-                    "description": "Distance to lift Z when the nozzle is moving to the next layer.",
-                    "unit": "mm",
-                    "type": "float",
-                    "default_value": 2,
-                    "minimum_value": "0",
-                    "minimum_value_warning": "0",
-                    "maximum_value_warning": "5",
-                    "enabled": "hop_at_layer_change",
-                    "settable_per_mesh": false,
-                    "settable_per_extruder": true,
-                    "comments": "BCN3D setting"
-                },
                 "retraction_hop_after_extruder_switch": {
                     "label": "Z Hop After Extruder Switch",
                     "description": "After the machine switched from one extruder to the other, the build plate is lowered to create clearance between the nozzle and the print. This prevents the nozzle from leaving oozed material on the outside of a print.",
@@ -3410,32 +3350,6 @@
                     "default_value": true,
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
-                },
-                "clone_cool_fan":
-                {
-                    "label": "Clone Print Cooling",
-                    "description": "Enables cooling fan for the idle extruder. This setting allows better temperature control for dual extruder prints.",
-                    "type": "bool",
-                    "default_value": false,
-                    "enabled": false,
-                    "settable_per_extruder": false,
-                    "comments": "BCN3D setting"
-                },
-                "clone_cool_fan_gcode":
-                {
-                    "label": "Clone Print GCode",
-                    "description": "GCode to enable cooling fan for the idle extruder.",
-                    "type": "enum",
-                    "options":
-                    {
-                        "": "No",
-                        "M108 P1      ;enable layer fan for the idle extruder": "Yes"
-                    },
-                    "default_value": "",
-                    "value": "'M108 P1      ;enable layer fan for the idle extruder' if clone_cool_fan else ''",
-                    "enabled": false,
-                    "settable_per_extruder": false,
-                    "comments": "BCN3D setting"
                 },
                 "cool_fan_speed":
                 {
@@ -4267,17 +4181,6 @@
             "description": "Adhesion",
             "children":
             {
-                "purge_in_bucket_before_start":
-                {
-                    "label": "Purge Before Printing",
-                    "description": "Whether to prime the filament in the bucket before printing. Turning this setting on will ensure that the extruder will have material ready at the nozzle before printing. Printing Brim or Skirt can act like priming too, in which case turning this setting off saves some time.",
-                    "type": "bool",
-                    "default_value": false,
-                    "settable_per_mesh": false,
-                    "settable_per_extruder": true,
-                    "enabled": false,
-                    "comments": "BCN3D setting"
-                },
                 "purge_in_bucket_before_start_l_enable_gcode":
                 {
                     "label": "Purge Before Printing L Enable GCode",
@@ -4306,17 +4209,6 @@
                     "default_value": "",
                     "value": "purge_in_bucket_before_start_l_enable_gcode if print_mode != 'regular' else 'G1 F' + str(extruderValue(1, 'purge_speed_gcode')) + ' E' + str(extruderValue(1, 'start_purge_distance')) + ' ;extrude ' + str(extruderValue(1, 'start_purge_distance')) + 'mm of feed stock' if extruderValue(1, 'purge_in_bucket_before_start') and 1 in getUsedExtruders() else ''",
                     "enabled": false,
-                    "comments": "BCN3D setting"
-                },
-                "start_purge_distance": {
-                    "label": "Start Purge Distance",
-                    "description": "Filament distance purged before extruder starts printing.",
-                    "unit": "mm",
-                    "type": "float",
-                    "default_value": 20,
-                    "minimum_value": "0",
-                    "enabled": "purge_in_bucket_before_start",
-                    "settable_per_extruder": true,
                     "comments": "BCN3D setting"
                 },
                 "prime_blob_enable":
@@ -4946,35 +4838,12 @@
             "description": "Settings used for printing with multiple extruders.",
             "children":
             {
-                "fix_tool_change_travel":
-                {
-                    "label": "Fix Tool Change Travel",
-                    "description": "Allows the new tool to go straight to the position where it has to print, instead of going to the last position before tool change and then travel to the position where it has to print.",
-                    "type": "bool",
-                    "default_value": false,
-                    "enabled": false,
-                    "settable_per_mesh": false,
-                    "settable_per_extruder": false,
-                    "comments": "BCN3D setting"
-                },
                 "purge_in_bucket": {
                     "label": "Purge At Tool Change",
                     "description": "Add an extra prime amount in the bucket to compensate oozed material while the Extruder was idle. Disable Prime tower to save time and filament.",
                     "type": "bool",
                     "default_value": false,
                     "enabled": false,
-                    "settable_per_extruder": true,
-                    "comments": "BCN3D setting"
-                },
-                "purge_distance": {
-                    "label": "Purge Distance",
-                    "description": "Filament distance purged at extruder change.",
-                    "unit": "mm",
-                    "type": "float",
-                    "default_value": 1.5,
-                    "minimum_value": "0",
-                    "maximum_value_warning": "50",
-                    "enabled": "purge_in_bucket and not smart_purge and print_mode == 'regular'",
                     "settable_per_extruder": true,
                     "comments": "BCN3D setting"
                 },
@@ -5137,28 +5006,6 @@
                         }
                     }
                 },
-                "prime_tower_closest_to":
-                {
-                    "label": "Prime Tower Preferred Position",
-                    "description": "Select the preferred area of the buildplate to automatically place the prime tower.",
-                    "type": "enum",
-                    "options":
-                    {
-                        "top-left": "Top Left",
-                        "top": "Top",
-                        "top-right": "Top Right",
-                        "right": "Right",
-                        "bottom-right": "Bottom Right",
-                        "bottom": "Bottom",
-                        "bottom-left": "Bottom Left",
-                        "left": "Left"
-                    },
-                    "default_value": "top-right",
-                    "enabled": "resolveOrValue('prime_tower_enable')",
-                    "settable_per_mesh": false,
-                    "settable_per_extruder": false,
-                    "comments": "BCN3D setting"
-                },
                 "prime_tower_position_x":
                 {
                     "label": "Prime Tower X Position",
@@ -5167,7 +5014,7 @@
                     "unit": "mm",
                     "enabled": "resolveOrValue('prime_tower_enable')",
                     "default_value": 200,
-                    "value": "round(max(min([coordinates[0] for coordinates in getSceneBoundingBox()]) - 3, prime_tower_size + max(extruderValue(adhesion_extruder_nr, 'brim_width') * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 if adhesion_type == 'brim' else (extruderValue(adhesion_extruder_nr, 'raft_margin') if adhesion_type == 'raft' else (extruderValue(adhesion_extruder_nr, 'skirt_gap') if adhesion_type == 'skirt' else 0)), max(extruderValues('travel_avoid_distance'))) + max(extruderValues('support_offset')) + sum(extruderValues('skirt_brim_line_width')) * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 + 5) if prime_tower_closest_to in ['top-left', 'left', 'bottom-left'] else min([coordinates[0] for coordinates in getSceneBoundingBox()]) - 3 + (max([coordinates[0] for coordinates in getSceneBoundingBox()]) + prime_tower_size + 3 - (min([coordinates[0] for coordinates in getSceneBoundingBox()]) - 3)) / 2 if prime_tower_closest_to in ['top', 'bottom'] else min(max([coordinates[0] for coordinates in getSceneBoundingBox()]) + prime_tower_size + 3, machine_width - max(extruderValue(adhesion_extruder_nr, 'brim_width') * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 if adhesion_type == 'brim' else (extruderValue(adhesion_extruder_nr, 'raft_margin') if adhesion_type == 'raft' else (extruderValue(adhesion_extruder_nr, 'skirt_gap') if adhesion_type == 'skirt' else 0)), max(extruderValues('travel_avoid_distance'))) - max(extruderValues('support_offset')) - sum(extruderValues('skirt_brim_line_width')) * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 - 5), 1)",
+                    "value": "machine_width - max(extruderValue(adhesion_extruder_nr, 'brim_width') * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 if adhesion_type == 'brim' else (extruderValue(adhesion_extruder_nr, 'raft_margin') if adhesion_type == 'raft' else (extruderValue(adhesion_extruder_nr, 'skirt_gap') if adhesion_type == 'skirt' else 0)), max(extruderValues('travel_avoid_distance'))) - max(extruderValues('support_offset')) - sum(extruderValues('skirt_brim_line_width')) * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 - 1",
                     "maximum_value": "machine_width / 2 if machine_center_is_zero else machine_width",
                     "minimum_value": "resolveOrValue('prime_tower_size') - machine_width / 2 if machine_center_is_zero else resolveOrValue('prime_tower_size')",
                     "settable_per_mesh": false,
@@ -5181,7 +5028,7 @@
                     "unit": "mm",
                     "enabled": "resolveOrValue('prime_tower_enable')",
                     "default_value": 200,
-                    "value": "round(max(machine_depth - max([coordinates[1] for coordinates in getSceneBoundingBox()]) - prime_tower_size - 3, max(extruderValue(adhesion_extruder_nr, 'brim_width') * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 if adhesion_type == 'brim' else (extruderValue(adhesion_extruder_nr, 'raft_margin') if adhesion_type == 'raft' else (extruderValue(adhesion_extruder_nr, 'skirt_gap') if adhesion_type == 'skirt' else 0)), max(extruderValues('travel_avoid_distance'))) + max(extruderValues('support_offset')) + sum(extruderValues('skirt_brim_line_width')) * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 + 5) if prime_tower_closest_to in ['bottom-left', 'bottom', 'bottom-right'] else machine_depth - max([coordinates[1] for coordinates in getSceneBoundingBox()]) - prime_tower_size - 3 + (machine_depth - min([coordinates[1] for coordinates in getSceneBoundingBox()]) + 3 - (machine_depth - max([coordinates[1] for coordinates in getSceneBoundingBox()]) - prime_tower_size - 3)) / 2 if prime_tower_closest_to in ['left', 'right'] else min(machine_depth - min([coordinates[1] for coordinates in getSceneBoundingBox()]) + 3, machine_depth - prime_tower_size - max(extruderValue(adhesion_extruder_nr, 'brim_width') * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 if adhesion_type == 'brim' else (extruderValue(adhesion_extruder_nr, 'raft_margin') if adhesion_type == 'raft' else (extruderValue(adhesion_extruder_nr, 'skirt_gap') if adhesion_type == 'skirt' else 0)), max(extruderValues('travel_avoid_distance'))) - max(extruderValues('support_offset')) - sum(extruderValues('skirt_brim_line_width')) * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 - 5), 1)",
+                    "value": "machine_depth - prime_tower_size - max(extruderValue(adhesion_extruder_nr, 'brim_width') * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 if adhesion_type == 'brim' else (extruderValue(adhesion_extruder_nr, 'raft_margin') if adhesion_type == 'raft' else (extruderValue(adhesion_extruder_nr, 'skirt_gap') if adhesion_type == 'skirt' else 0)), max(extruderValues('travel_avoid_distance'))) - max(extruderValues('support_offset')) - sum(extruderValues('skirt_brim_line_width')) * extruderValue(adhesion_extruder_nr, 'initial_layer_line_width_factor') / 100 - 1",
                     "maximum_value": "machine_depth / 2 - resolveOrValue('prime_tower_size') if machine_center_is_zero else machine_depth - resolveOrValue('prime_tower_size')",
                     "minimum_value": "machine_depth / -2 if machine_center_is_zero else 0",
                     "settable_per_mesh": false,
