@@ -5919,9 +5919,19 @@
                     "description": "The volume otherwise oozed. This value should generally be close to the nozzle diameter cubed.",
                     "unit": "mm³",
                     "type": "float",
-                    "default_value": 0.064,
+                    "value": "machine_nozzle_size * layer_height * coasting_length",
+                    "enabled": false,
+                    "settable_per_mesh": false,
+                    "settable_per_extruder": true
+                },
+                "coasting_length":
+                {
+                    "label": "Coasting Length",
+                    "description": "",
+                    "unit": "mm",
+                    "type": "float",
+                    "default_value": 0.2,
                     "minimum_value": "0",
-                    "maximum_value_warning": "machine_nozzle_size * 5",
                     "enabled": "coasting_enable",
                     "settable_per_mesh": false,
                     "settable_per_extruder": true
