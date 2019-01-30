@@ -46,6 +46,7 @@
         <setting key="heated bed temperature">65</setting>
         <setting key="standby temperature">150</setting>
         <setting key="print cooling">0</setting>
+        <setting key="retraction amount">6</setting>
 
         <machine>
            <machine_identifier manufacturer="BCN3D Technologies" product="bcn3dsigma" />
